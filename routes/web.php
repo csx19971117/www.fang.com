@@ -14,6 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-//陈思旭太帅了
-//哈哈
-//撒娇的撒扩大的卡啊
+
+// 包含 后台路由
+include base_path('routes/admin/route.php');
