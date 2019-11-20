@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+# 引入邮件类
+use Illuminate\Mail\Mailer;
+use Mail;
+use Illuminate\Mail\Message;
+
 class LoginController extends Controller
 {
     // 后台登录显示
     public function index(){
+        // $chen=$_SERVER['SCRIPT_FILENAME'];
+        // $chen=$_SERVER['QUERY_STRING'];
+        // $chen=__FILE__;
+        // dump($chen);die;
         return view('admin.login.index');
     }
 
@@ -19,6 +28,7 @@ class LoginController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
+        
 
         // auth登录
         //$bool = auth()->guard('web')->attempt($data);
@@ -29,11 +39,20 @@ class LoginController extends Controller
 
         // // 得到用户的信息
         // dump(auth()->user());
+        $haha=auth()->user();
 
-        if($bool){
-            return view('admin.login.mean');
+        if(!$bool){
+            return redirect(route('admin.login'))->withErrors(['error'=>'登陆失败']);
         }
-        echo "你密码输错了白痴";
+        // // 发送登陆成功邮箱
+        // Mail::send('admin.mailer.login',compact('haha'),function(Message $message) use ($haha){
+        //     // 主题
+        //     $message->subject('用户登陆通知');
+        //     $message->to('906892939@qq.com','24.');
+       
+        // });
+        // 跳转到后台首页  
+        return redirect(route('admin.index'))->withErrors(['success'=>'登陆成功']);
         
     }
 

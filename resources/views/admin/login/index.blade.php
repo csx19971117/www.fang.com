@@ -14,13 +14,8 @@
 <div class="header"></div>
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
-        {{-- 显示表单验证错误信息 --}}
-        @if($errors->any())
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        @endif
-
+   {{-- 表单验证提示 --}}
+     @include('admin.public.msg')
         <form class="form form-horizontal" action="{{ route('admin.login') }}" method="post">
             {{-- laravel5.5--}}
             @csrf
@@ -50,3 +45,10 @@
 <script type="text/javascript" src="{{ AdminWeb() }}static/h-ui/js/H-ui.min.js"></script>
 </body>
 </html>
+
+
+
+<!-- 提示信息自动消失 -->
+<script>
+setTimeout("document.getElementById('k').style.display='none'",2000);
+</script>

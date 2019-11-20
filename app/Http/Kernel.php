@@ -19,6 +19,10 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\TrustProxies::class,
+
+
+        // 后台用户登陆是否检查
+        // \App\Http\Middleware\CheckAdmin::class,
     ];
 
     /**
@@ -60,6 +64,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        // 路由中间件的别名  类路由 
+        'checkadmin'=> \App\Http\Middleware\CheckAdmin::class,
     ];
 
     /**
